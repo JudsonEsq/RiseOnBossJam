@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe000c8d425752b4ab879434982d9374, type: 3}
+  m_Name: OfficeSO
+  m_EditorClassIdentifier: Assembly-CSharp::RoomSO
+  _cost: 1
+  thumbnailSprite: {fileID: 0}
+  descriptionSprite: {fileID: 0}
+  doorLayouts: 

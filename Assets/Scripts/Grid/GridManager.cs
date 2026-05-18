@@ -6,65 +6,61 @@ using UnityEngine.UI;
 
 public class GridManager : MonoBehaviour
 {
-    [SerializeField] private Grid playAreaGrid;
     [SerializeField] private Grid inventoryGrid;
+    [SerializeField] private Grid playAreaGrid;
+    [SerializeField] private GridSystemSO inventoryGridSO;
+    [SerializeField] private GridSystemSO playAreaGridSO;
     [SerializeField] private GameObject previewObj;
     [SerializeField] private GameObject tilePrefab;
     [SerializeField] private GameObject cursor;
     [SerializeField] private GameObject cardPrefab;
     private List<Vector3Int> inventoryPos = new();
-    [SerializeField] private int inventoryRows = 3;
-    [SerializeField] private int inventoryCols = 3;
-    [SerializeField] private int playAreaRows = 5;
-    [SerializeField] private int playAreaCols = 5;
     [SerializeField] private Canvas inventoryCanvas;
     [SerializeField] private Canvas playAreaCanvas;
     [SerializeField] private GameObject prefabUI;
     private Dictionary<Vector3Int, GameObject> availableTiles = new();
     private Dictionary<Vector3Int, GameObject> placedTiles = new();
-    [SerializeField] private int inventoryXMax = 6;
-    [SerializeField] private int inventoryXMin = 4;
-    [SerializeField] private int inventoryYMax = 1;
-    [SerializeField] private int inventoryYMin = -1;
-    [SerializeField] private int playAreaXMax = 2;
-    [SerializeField] private int playAreaXMin = -2;
-    [SerializeField] private int playAreaYMax = 2;
-    [SerializeField] private int playAreaYMin = -2;
     private bool holdingCard;
     private bool holdingTile;
     private Vector3Int cardPos;
+
+    // MOVE THESE TO AN INVENTORY SO RUNTIME SET
+    private Dictionary<Vector3Int, Room> inventoryRooms;
+    private Dictionary<Vector3Int, Trap> inventoryTraps;
+
+    // MOVE THESE TO AN PLAY AREA SO RUNTIME SET
+    private Dictionary<Vector3Int, Room> placedRooms;
+    private Dictionary<Vector3Int, Trap> placedTraps;
 
     InputAction primaryAction;
     InputAction releaseAction;
     InputAction removeAction;
 
     void Awake() {
-        RectTransform playAreaRT = playAreaCanvas.GetComponent<RectTransform>();
-        float playAreaCellSizeX = playAreaCanvas.GetComponent<GridLayoutGroup>().cellSize.x;
-        float playAreaCellSizeY = playAreaCanvas.GetComponent<GridLayoutGroup>().cellSize.y;
+        if (inventoryGrid != null) {
+            inventoryGridSO.grid = inventoryGrid;
+            if (inventoryCanvas != null) inventoryGridSO.canvas = inventoryCanvas;
+            inventoryGridSO.SetGrid();
+        }
 
-        playAreaRT.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, playAreaCols * playAreaCellSizeX);
-        playAreaRT.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, playAreaRows * playAreaCellSizeY);
+        if (playAreaGrid != null) {
+            playAreaGridSO.grid = playAreaGrid;
+            if (playAreaCanvas != null) playAreaGridSO.canvas = playAreaCanvas;
+            playAreaGridSO.SetGrid();
+        }
 
-        RectTransform inventoryRT = inventoryCanvas.GetComponent<RectTransform>();
-        float inventoryCellSizeX = inventoryCanvas.GetComponent<GridLayoutGroup>().cellSize.x;
-        float inventoryCellSizeY = inventoryCanvas.GetComponent<GridLayoutGroup>().cellSize.y;
-
-        inventoryRT.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, inventoryCols * inventoryCellSizeX);
-        inventoryRT.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, inventoryRows * inventoryCellSizeY);
-
-        for (int i = 0; i < playAreaCols * playAreaRows; i++) {
+        for (int i = 0; i < playAreaGridSO.columns * playAreaGridSO.rows; i++) {
             Instantiate(prefabUI, playAreaCanvas.transform);
         }
 
-        for (int i = 0; i < inventoryCols * inventoryRows; i++) {
+        for (int i = 0; i < inventoryGridSO.columns * inventoryGridSO.rows; i++) {
             Instantiate(prefabUI, inventoryCanvas.transform);
         }
         
 
-        for (int i = 0; i < inventoryRows; i++) {
-            for (int j = 0; j < inventoryCols; j++) {
-                Vector3Int pos = new Vector3Int(inventoryXMin + j, inventoryYMax - i, 0);
+        for (int i = 0; i < inventoryGridSO.rows; i++) {
+            for (int j = 0; j < inventoryGridSO.columns; j++) {
+                Vector3Int pos = new Vector3Int(inventoryGridSO.cellPosMin.x + j, inventoryGridSO.cellPosMax.y - i, 0);
                 inventoryPos.Add(pos);
 
                 GameObject tile = Instantiate(cardPrefab, inventoryGrid.GetCellCenterWorld(pos), Quaternion.identity);
@@ -86,14 +82,14 @@ public class GridManager : MonoBehaviour
         Vector3Int cellPos;
         Vector3 snappedPos;
 
-        if (CursorOverInventory(mouseWorldPos) && !holdingCard && !holdingTile) {
+        if (inventoryGridSO.CheckForCursor(mouseWorldPos) && !holdingCard && !holdingTile) {
             cellPos = inventoryGrid.WorldToCell(mouseWorldPos);
 
             if(primaryAction.triggered) PickUpCard(cellPos);
             return;
         }
 
-        if (CursorOverPlayArea(mouseWorldPos)) {
+        if (playAreaGridSO.CheckForCursor(mouseWorldPos)) {
             cellPos = playAreaGrid.WorldToCell(mouseWorldPos);
             snappedPos = playAreaGrid.GetCellCenterWorld(cellPos);
             snappedPos.z = 0;
@@ -120,7 +116,7 @@ public class GridManager : MonoBehaviour
         }
 
         if (holdingCard || holdingTile) {
-            Vector3 pos = new Vector3(mouseWorldPos.x, mouseWorldPos.y, -1);
+            Vector3 pos = new(mouseWorldPos.x, mouseWorldPos.y, -1);
             previewObj.transform.position = pos;
 
             if (releaseAction.triggered) {
@@ -130,22 +126,6 @@ public class GridManager : MonoBehaviour
 
             return;
         }
-    }
-
-    bool CursorOverInventory(Vector3 pos) {
-        Vector3Int cellPos = inventoryGrid.WorldToCell(pos);
-
-        if (cellPos.x > inventoryXMax || cellPos.x < inventoryXMin || cellPos.y > inventoryYMax || cellPos.y < inventoryYMin) return false;
-
-        else return true;
-    }
-
-    bool CursorOverPlayArea(Vector3 pos) {
-        Vector3Int cellPos = playAreaGrid.WorldToCell(pos);
-
-        if (cellPos.x > playAreaXMax || cellPos.x < playAreaXMin || cellPos.y > playAreaYMax || cellPos.y < playAreaYMin) return false;
-
-        else return true;
     }
 
     void PickUpCard(Vector3Int pos) {
