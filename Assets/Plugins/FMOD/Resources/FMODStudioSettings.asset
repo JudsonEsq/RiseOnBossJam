@@ -267,8 +267,12 @@ MonoBehaviour:
   VirtualChannelSettings: []
   RealChannelSettings: []
   Plugins: []
-  MasterBanks: []
-  Banks: []
+  MasterBanks:
+  - Master
+  Banks:
+  - FrontEnd
+  - Gameplay
+  - Music
   BanksToLoad:
   - Music
   - FrontEnd

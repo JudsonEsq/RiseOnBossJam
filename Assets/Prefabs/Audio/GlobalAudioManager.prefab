@@ -1,0 +1,181 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &9000199449551569713
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7249980367629398332}
+  - component: {fileID: 4338168451748589572}
+  m_Layer: 0
+  m_Name: GlobalAudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7249980367629398332
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9000199449551569713}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4338168451748589572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9000199449551569713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9188efbddf42cc4dbc2cc12bd8d94ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GlobalAudioManager
+  _audioStyleSheet: {fileID: 11400000, guid: 3da0cbc48856419459e2d07529084d68, type: 2}
+  _musicEvent:
+    Guid:
+      Data1: -318447696
+      Data2: 1221566331
+      Data3: -1703209842
+      Data4: -295516830
+    Path: event:/Music/Music
+  _musicParameterName: MusicState
+  roomTilePlayedEvent:
+    Guid:
+      Data1: 1376911758
+      Data2: 1193289295
+      Data3: -1153171799
+      Data4: -1619729205
+    Path: event:/Gameplay/Tiles/RoomTilePlayed
+  trapTilePlayedEvent:
+    Guid:
+      Data1: -1090271624
+      Data2: 1137037453
+      Data3: -1261717829
+      Data4: 661114971
+    Path: event:/Gameplay/Tiles/TrapTilePlayed
+  tileDrawnEvent:
+    Guid:
+      Data1: -862018396
+      Data2: 1189090510
+      Data3: 1923303090
+      Data4: 707632738
+    Path: event:/Gameplay/Tiles/TileDrawn
+  tileDiscardedEvent:
+    Guid:
+      Data1: 670738312
+      Data2: 1188148976
+      Data3: 163929786
+      Data4: 1312161931
+    Path: event:/Gameplay/Tiles/TileDiscarded
+  tileSelectedEvent:
+    Guid:
+      Data1: 1804460463
+      Data2: 1159251826
+      Data3: 1251618980
+      Data4: -2024266837
+    Path: event:/Gameplay/Tiles/TileSelected
+  tileDeselectedEvent:
+    Guid:
+      Data1: -274995650
+      Data2: 1243361079
+      Data3: -353029235
+      Data4: -362693540
+    Path: event:/Gameplay/Tiles/TileDeselected
+  tileHoveredEvent:
+    Guid:
+      Data1: -767596464
+      Data2: 1185300397
+      Data3: -1330427498
+      Data4: 1483441379
+    Path: event:/Gameplay/Tiles/TileHovered
+  tileRotatedEvent:
+    Guid:
+      Data1: -493022398
+      Data2: 1133074417
+      Data3: -472106340
+      Data4: -935205825
+    Path: event:/Gameplay/Tiles/TileRotated
+  warriorAttackEvent:
+    Guid:
+      Data1: -1712013741
+      Data2: 1138384652
+      Data3: 1060046004
+      Data4: 1079767291
+    Path: event:/Gameplay/Adventurers/Warrior_Attack
+  warriorDeathEvent:
+    Guid:
+      Data1: 589919866
+      Data2: 1322226855
+      Data3: -981619271
+      Data4: 1293333594
+    Path: event:/Gameplay/Adventurers/Warrior_Defeated
+  warriorTakeDamageEvent:
+    Guid:
+      Data1: 150784338
+      Data2: 1124532026
+      Data3: 1678443152
+      Data4: -854465287
+    Path: event:/Gameplay/Adventurers/Warrior_TakeDamage
+  mageAttackEvent:
+    Guid:
+      Data1: 1284463663
+      Data2: 1336714839
+      Data3: 271077039
+      Data4: 571067993
+    Path: event:/Gameplay/Adventurers/Mage_Attack
+  mageTakeDamageEvent:
+    Guid:
+      Data1: 134454121
+      Data2: 1073881127
+      Data3: 1062514326
+      Data4: -806327085
+    Path: event:/Gameplay/Adventurers/Mage_TakeDamage
+  mageDeathEvent:
+    Guid:
+      Data1: -162606028
+      Data2: 1209709972
+      Data3: -134574453
+      Data4: 1981893076
+    Path: event:/Gameplay/Adventurers/Mage_Defeated
+  rogueAttackEvent:
+    Guid:
+      Data1: 1687519565
+      Data2: 1304543347
+      Data3: 1881111212
+      Data4: -1965784119
+    Path: event:/Gameplay/Adventurers/Rogue_Attack
+  rogueTakeDamageEvent:
+    Guid:
+      Data1: -1159684929
+      Data2: 1263284012
+      Data3: 1836480180
+      Data4: 1624730844
+    Path: event:/Gameplay/Adventurers/Rogue_TakeDamage
+  rogueDeathEvent:
+    Guid:
+      Data1: -1292179412
+      Data2: 1213506755
+      Data3: 428363665
+      Data4: 1333127084
+    Path: event:/Gameplay/Adventurers/Rogue_Defeated
+  adventurerFindTreasureEvent:
+    Guid:
+      Data1: -1370961991
+      Data2: 1164259008
+      Data3: -408455531
+      Data4: -57644802
+    Path: event:/Gameplay/Adventurers/FoundTreasure
