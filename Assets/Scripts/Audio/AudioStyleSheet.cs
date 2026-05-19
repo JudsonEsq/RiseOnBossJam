@@ -12,6 +12,7 @@ using System.Collections.Generic;
     public string styleName;
     public EventReference clickSound;
     public  EventReference hoverSound;
+    
 }
 
 [CreateAssetMenu(fileName = "NewAudioStyleSheet", menuName = "Audio/Audio Style Sheet")]
