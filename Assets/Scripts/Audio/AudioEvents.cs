@@ -54,6 +54,10 @@ public static class AudioEvents
         public static void RaiseTileRotated() => OnTileRotated?.Invoke();
         public static event System.Action OnTilePickedUp;
         public static void RaiseTilePickedUp() => OnTilePickedUp?.Invoke();
+        public static event System.Action OnTileReleased;
+        public static void RaiseTileReleased() => OnTileReleased?.Invoke();
+        public static event System.Action OnOrganizeInventory;
+        public static void RaiseOrganizeInventory() => OnOrganizeInventory?.Invoke();
 
     #endregion
 

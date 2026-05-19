@@ -24,6 +24,9 @@ public class GlobalAudioManager : MonoBehaviour
         [SerializeField] private EventReference tileHoveredEvent;
         [SerializeField] private EventReference tileRotatedEvent;
         [SerializeField] private EventReference tilePickedUpEvent;
+        [SerializeField] private EventReference tileReleasedEvent;
+        [SerializeField] private EventReference organizeInventoryEvent;
+
 
         [Space(10)]
         [Header("Character Actions")]
@@ -37,6 +40,7 @@ public class GlobalAudioManager : MonoBehaviour
         [SerializeField] private EventReference rogueTakeDamageEvent;
         [SerializeField] private EventReference rogueDeathEvent;
         [SerializeField] private EventReference adventurerFindTreasureEvent;
+
 
     #endregion
 
@@ -74,6 +78,10 @@ public class GlobalAudioManager : MonoBehaviour
         OnTileHovered += () => Play2DOneShot(tileHoveredEvent);
         OnTileRotated += () => Play2DOneShot(tileRotatedEvent);
         OnTilePickedUp += () => Play2DOneShot(tilePickedUpEvent);
+        OnTileReleased += () => Play2DOneShot(tileReleasedEvent);
+        OnOrganizeInventory += () => Play2DOneShot(organizeInventoryEvent);
+
+
         OnWarriorAttack += () => Play2DOneShot(warriorAttackEvent);
         OnWarriorDeath += () => Play2DOneShot(warriorDeathEvent);
         OnWarriorTakeDamage += () => Play2DOneShot(warriorTakeDamageEvent);

@@ -116,6 +116,20 @@ MonoBehaviour:
       Data3: 2012138907
       Data4: 1075921905
     Path: event:/Gameplay/Tiles/TilePickedUp
+  tileReleasedEvent:
+    Guid:
+      Data1: 1685607041
+      Data2: 1278515936
+      Data3: 1736723897
+      Data4: -1485567311
+    Path: event:/Gameplay/Tiles/TileReleased
+  organizeInventoryEvent:
+    Guid:
+      Data1: -645102852
+      Data2: 1079110766
+      Data3: 1928983433
+      Data4: 2024534234
+    Path: event:/Gameplay/Inventory_Organize
   warriorAttackEvent:
     Guid:
       Data1: -1712013741

@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static AudioEvents;
 
 public class GridManager : MonoBehaviour
 {
@@ -182,6 +183,8 @@ public class GridManager : MonoBehaviour
             holdingTile = false;
             return;
         }
+
+        RaiseTilePickedUp(); //play audio for picking up tile
     }
 
     void RemoveTile(Vector3Int pos) {
@@ -189,6 +192,8 @@ public class GridManager : MonoBehaviour
 
         Destroy(placedTiles[pos]);
         placedTiles.Remove(pos);
+
+        RaiseTileDiscarded(); //play audio for destroying tile
 
         Vector3Int spawnPos = inventoryPos[availableTiles.Count];
         GameObject newCard = Instantiate(cardPrefab, inventoryGrid.GetCellCenterWorld(spawnPos), Quaternion.identity);
@@ -201,6 +206,7 @@ public class GridManager : MonoBehaviour
         previewObj.transform.position = playAreaGrid.GetCellCenterWorld(cardPos);
         previewObj = null;
         holdingTile = false;
+        RaiseTileReleased(); //play audio for discarding tile, although is that what this Release Tile does?]
     }
 
     void OrganizeInventory() {
@@ -228,5 +234,6 @@ public class GridManager : MonoBehaviour
         foreach (Vector3Int card in tempCards.Keys) {
             availableTiles.Add(card, tempCards[card]);
         }
+        RaiseOrganizeInventory(); //play audio for organizing inventory
     }
 }
