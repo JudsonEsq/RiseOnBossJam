@@ -109,6 +109,13 @@ MonoBehaviour:
       Data3: -472106340
       Data4: -935205825
     Path: event:/Gameplay/Tiles/TileRotated
+  tilePickedUpEvent:
+    Guid:
+      Data1: 2130919478
+      Data2: 1216535798
+      Data3: 2012138907
+      Data4: 1075921905
+    Path: event:/Gameplay/Tiles/TilePickedUp
   warriorAttackEvent:
     Guid:
       Data1: -1712013741

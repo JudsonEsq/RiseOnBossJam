@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static AudioEvents;
 
 public class InventoryManager : MonoBehaviour {
     [SerializeField] private Grid inventoryGrid;
@@ -28,6 +29,7 @@ public class InventoryManager : MonoBehaviour {
     }
 
     void PickUpTile(Vector3 pos) {
+        RaiseTilePickedUp(); //play audio for picking up tile
         return;
     }
 }
